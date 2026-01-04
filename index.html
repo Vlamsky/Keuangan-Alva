@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DompetKu Pro - Ultimate Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="main-container glass">
+        <header class="main-header">
+            <h2><i class="fas fa-wallet"></i> DompetKu <span class="badge">PRO</span></h2>
+            <div class="header-actions">
+                <button class="btn-export" onclick="exportToCSV()"><i class="fas fa-file-export"></i> Export Excel</button>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <section class="overview-section">
+                <div class="balance-card glass-card">
+                    <h3>Saldo Total</h3>
+                    <h1 id="balance">Rp 0</h1>
+                    
+                    <div class="budget-container">
+                        <div class="budget-label">
+                            <span>Penggunaan Budget</span>
+                            <span id="budget-percentage">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inc-exp-container">
+                    <div class="inc-box glass-card">
+                        <div class="icon-circle income"><i class="fas fa-arrow-down"></i></div>
+                        <div>
+                            <h4>Pemasukan</h4>
+                            <p id="money-plus" class="money plus">+Rp 0</p>
+                        </div>
+                    </div>
+                    <div class="exp-box glass-card">
+                        <div class="icon-circle expense"><i class="fas fa-arrow-up"></i></div>
+                        <div>
+                            <h4>Pengeluaran</h4>
+                            <p id="money-minus" class="money minus">-Rp 0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-wrapper glass-card">
+                    <h3>Statistik Kategori</h3>
+                    <div class="chart-container">
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="details-section">
+                 <div class="add-transaction-card glass-card">
+                    <h3><i class="fas fa-plus-circle"></i> Transaksi Baru</h3>
+                    <form id="form">
+                        <div class="input-group">
+                            <div class="form-control">
+                                <label>Keterangan</label>
+                                <input type="text" id="text" placeholder="Nama transaksi..." autocomplete="off">
+                            </div>
+                            <div class="form-control">
+                                <label>Jumlah (Rp)</label>
+                                <input type="number" id="amount" placeholder="0">
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <div class="form-control">
+                                <label>Kategori</label>
+                                <select id="category">
+                                    <option value="food">🍔 Makanan</option>
+                                    <option value="transport">🚗 Transport</option>
+                                    <option value="salary">💰 Gaji</option>
+                                    <option value="shopping">🛍️ Belanja</option>
+                                    <option value="bills">💡 Tagihan</option>
+                                    <option value="other">✨ Lainnya</option>
+                                </select>
+                            </div>
+                            <div class="form-control">
+                                <label>Tanggal</label>
+                                <input type="date" id="date">
+                            </div>
+                        </div>
+
+                        <div class="type-selector">
+                            <input type="radio" name="type" id="type-inc" value="income">
+                            <label for="type-inc" class="radio-label income">Pemasukan (+)</label>
+                            
+                            <input type="radio" name="type" id="type-exp" value="expense" checked>
+                            <label for="type-exp" class="radio-label expense">Pengeluaran (-)</label>
+                        </div>
+
+                        <button class="btn-submit">Simpan Data</button>
+                    </form>
+                </div>
+
+                <div class="history-card glass-card">
+                    <div class="history-header">
+                        <h3>Riwayat</h3>
+                        <div class="filter-btn-group">
+                            <button class="filter-btn active" onclick="filterList('all')">Semua</button>
+                            <button class="filter-btn" onclick="filterList('income')">Masuk</button>
+                            <button class="filter-btn" onclick="filterList('expense')">Keluar</button>
+                        </div>
+                    </div>
+                    <ul id="list" class="list">
+                        </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
